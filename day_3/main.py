@@ -100,7 +100,8 @@ with open('input') as f:
 
         line = f.readline().rstrip()
 
-    score = 0
+    score_1 = 0
+    score_2 = 0
         
     for part in my_engine.engine_part:
         if isinstance(part, Number):
@@ -109,8 +110,19 @@ with open('input') as f:
             for neighbour in my_engine.get_neighbours(part):
                 test = test or isinstance(neighbour, Symbol)
             if test:
-                score += part.number
+                score_1 += part.number
+
+        if isinstance(part, Symbol) and part.symbol == '*':
+            neigh_num = 0
+            acc = 1
+            for neighbour in my_engine.get_neighbours(part):
+                if isinstance(neighbour, Number):
+                    neigh_num += 1
+                    acc = acc * neighbour.number
+            if neigh_num == 2:
+                score_2 += acc
+                    
                     
 
-    print('part 1 sum : ', score)
-
+    print('part 1 sum : ', score_1)
+    print('part 2 sum : ', score_2)
