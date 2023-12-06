@@ -30,18 +30,19 @@ def parse(line, part = 1):
 
 
 with open("input") as f:
-    line = f.readline()
-    result = 0
+    line = f.readline().rstrip()
+    result_1 = 0
+    result_2 = 0
 
     while line != '':
         game_ID, max_red, max_green, max_blue = parse(line)
 
         if (max_blue <= 14 and max_red <= 12 and max_green <= 13):
-            result += game_ID
+            result_1 += game_ID
+        result_2 += max_blue * max_red * max_green
 
 
+        line = f.readline().rstrip()
 
-
-        line = f.readline()
-
-    print(result)
+    print("part 1 : ", result_1)
+    print("part 2 : ", result_2)
